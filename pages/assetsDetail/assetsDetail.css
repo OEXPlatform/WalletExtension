@@ -1,0 +1,200 @@
+.content {
+	width: 375px;
+	height: auto;
+	/* #ifdef H5 */
+	overflow-y: scroll;
+	/* #endif */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	background: #FFFFFF;
+	letter-spacing: 0.8px;
+}
+/* #ifdef H5 */
+.content::-webkit-scrollbar {
+  display: none;
+}
+/* #endif */
+.title{
+	/* width:calc(100% - 140rpx); */
+	width: 100%;
+	height: 59rpx;
+	text-align: center;
+	line-height: 59rpx;
+	font-size: 14px;
+	color: #000;
+	position: relative;
+	margin: 50rpx 0;
+/* 	margin-bottom: 0rpx; */
+	/* padding-left: 140rpx; */
+}
+.backIcon{
+	position: absolute;
+	left: 54rpx;
+	top: 0;
+	width: 59rpx;
+	height: 54rpx;
+}
+.assetsInfo{
+		width: 100%;
+		height: auto;
+		padding: 20rpx 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+	}
+	.assetsIcon{
+		width: 74rpx;
+		height: 74rpx;
+		border-radius: 50rpx;
+		margin: 20rpx 0;
+	}
+	.assetsName{
+		font-size: 20px;
+		color: #383C41;
+		font-weight: bold;
+		margin-bottom:42rpx ;
+	}
+	.exchangeRate{
+		font-size: 13px;
+		color: #767E89;
+		font-weight: bold;
+		margin-bottom:42rpx ;
+	}
+	.operationHandler{
+		width: 100%;
+		height: auto;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.operationHandler text{
+		width: 217rpx;
+		height: 70rpx;
+		border-radius: 50rpx;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		font-size: 15px;
+	}
+	.buyHandler,.sendHanler{
+		border: 1rpx solid #00C9A7;
+		color: #00C9A7;
+		margin-left: 49rpx;
+	}
+	.operationActive{
+		background: #00C9A7;
+		color: #FFFFFF;
+	}
+	.transactionDetails{
+		width: 100%;
+		height: 630rpx;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+	}
+	.bg{
+		width: 100%;
+		height: 18rpx;
+	}
+	.detailItem{
+		width: calc(100% - 60rpx);
+		height: auto;
+		padding: 30rpx 30rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1rpx solid rgba(201,202,206,0.6);
+	}
+	.left,.right{
+		width: 50%;
+	}
+	.left{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+	}
+	.right{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-end;
+	}
+	.outTitle{
+		font-size: 13px;
+		font-weight: bold;
+	}
+	.red{
+		color: #FC355F;
+	}
+	.leftTop{
+		margin-bottom: 8rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		width: 100%;
+	}
+	.out{
+		width: 30rpx;
+		height: 27rpx;
+		margin: 0 15rpx;
+	}
+	.account{
+		font-size: 13px;
+		color: #383C41;
+		width: auto;
+		max-width: 50%;
+		overflow: hidden;
+		text-overflow:ellipsis;
+		white-space: nowrap;
+	}
+	.leftBottom{
+		font-size: 12px;
+		color: #767E89;
+	}
+	.rightTop{
+		font-size: 14px;
+		font-weight: bold;
+		margin-bottom: 8rpx;
+	}
+	.rightBottom{
+		font-size: 12px;
+		color: #141426;
+	}
+	.titleBox{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.shotrAccount{
+		width: auto;
+		max-width: 250rpx;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.noData{
+		width: 100%;
+		height: 200rpx;
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+		align-items: center;
+		font-size: 14px;
+		color: #C2C9DF;
+	}
+	.vote{
+		color: #2972FF;
+	}
+	.green{
+		color: #00C9A7;
+	}

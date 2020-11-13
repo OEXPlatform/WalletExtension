@@ -1,0 +1,174 @@
+page
+		background #F2F3F4
+		opacity 1
+		// width 100%
+		// height 100%
+		
+.wallet
+	width 375px
+	height 600px
+	display flex
+	flex-direction column
+	justify-content flex-start
+	align-items center
+	overflow-y scroll
+
+.walletTitle
+	width 100%
+	height 65upx 
+	display flex
+	flex-direction row
+	justify-content center
+	align-items center
+	position relative
+	font-size 16px
+	color #141426
+	padding-top 50rpx
+	position fixed
+	z-index 4
+	
+.backimg
+	width 65upx 
+	height 65upx 
+	position fixed
+	left 65upx
+	top 50upx
+	
+.wallet_type
+	width 100%
+	height auto
+	display flex
+	flex-direction row
+	justify-content center
+	align-items center
+	padding-top 150upx
+	position fixed
+	z-index 3
+
+.wallet_type text
+	font-size 15px
+	color #8687A3
+	margin 0 66upx
+	
+.wallet_type .active
+	color #00C9A7
+	border-bottom 3px solid #00C9A7
+	padding 10upx 0
+	
+.zhujici
+	width 100%
+	height auto
+	display flex
+	flex-direction column
+	justify-content flex-start
+	align-items center
+	margin-top 240upx
+	// margin-bottom 3000upx
+	// z-index -1
+	margin-bottom 0upx
+	
+.zhujici_title
+	width 580upx
+	margin 10rpx 0 13upx 0
+	display flex
+	flex-direction row
+	justify-content flex-start
+	align-items center
+	
+.zhujici_title image
+	width 18upx 
+	height 18upx 
+	margin-right 22upx
+
+.zhujici_title text
+	font-size 14px 
+	color #8687a3
+	
+.zhujici_textarea
+	width 580upx
+	height 150upx
+	background #FFFFFF
+	box-shadow 0px 5rpx 11rpx rgba(0, 0, 0, 0.3)
+	opacity 1
+	border-radius 18upx
+	font-size 16px 
+	color #333
+	padding 20upx
+	margin-top 13upx
+	
+.textarea_placeholder
+	font-size 13px 
+	color #666
+	
+.tips
+	width 580upx
+	font-size 13px 
+	color #8687A3
+	margin-top 13upx
+.tips text
+	color #00C9A7
+	
+.zhujicipwd
+	// margin-top 109upx 
+	
+.pwd
+	width 620upx 
+	height 100upx 
+	background #FFFFFF
+	box-shadow 0px 5rpx 11rpx rgba(0, 0, 0, 0.3)
+	border-radius 20upx 
+	margin-top 18upx 
+	margin-top 15upx
+	position relative
+	display flex
+	flex-direction row
+	justify-content center
+	align-items center
+	
+.pwd input
+	width calc( 100% - 40upx)
+	height 100%
+	font-size 13px 
+	color #333
+	padding 0 20upx
+.pwd .passworld
+	width calc( 100% - 40upx)
+	height 98%
+	font-size 13px 
+	color #333
+	// padding 0 20upx
+	border none
+	outline none
+
+.pwd_placeholder
+	font-size 13px 
+	color #666
+	
+.importBtn
+	width 580upx 
+	height 112upx 
+	margin-top 50upx
+	
+.eyes
+	width 40upx 
+	height 40upx 
+	position absolute
+	right 20upx
+	top 50%
+	transform translateY(-50%)
+	
+// .account_name
+// 	width 580upx
+// 	height 100upx 
+// 	background #202039 
+// 	border-radius 20upx 
+// 	margin-top 15upx
+// 	padding 10upx 0
+	
+// .account_name input
+// 	width calc( 100% - 40upx)
+// 	height 100%
+// 	font-size 13px 
+// 	color #FFFFFF
+// 	padding 0 20upx
+	

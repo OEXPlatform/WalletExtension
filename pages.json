@@ -1,0 +1,196 @@
+{
+	"pages": [
+		{
+			"path": "pages/assetsList/assetsList",
+			"style": {
+				"navigationBarTitleText": "资产列表",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/assetsDetail/assetsDetail",
+			"style": {
+				"navigationBarTitleText": "资产详情",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/setNodeInfo/setNodeInfo",
+			"style": {
+				"navigationBarTitleText": "设置节点",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/start/start",
+			"style": {
+				"navigationBarTitleText": "启动图",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/exportwallet/exportwallet",
+			"style": {
+				"navigationBarTitleText": "导出钱包",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		
+		{
+			"path": "pages/importwallet/importWallet",
+			"style": {
+				"navigationBarTitleText": "导入助记词",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/register/major",
+			"style": {
+				"navigationBarTitleText": "专业账户注册",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/register/verificationWorlds",
+			"style": {
+				"navigationBarTitleText": "验证助记词",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/register/backupsWorlds",
+			"style": {
+				"navigationBarTitleText": "备份助记词",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		
+		
+		{
+			"path": "pages/register/safetyTips",
+			"style": {
+				"navigationBarTitleText": "安全提示",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/register/xiaobai",
+			"style": {
+				"navigationBarTitleText": "小白",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
