@@ -1,6 +1,32 @@
 {
 	"pages": [
 		{
+			"path": "pages/collection/collection",
+			"style": {
+				"navigationBarTitleText": "收款",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/transferAccounts/transferAccounts",
+			"style": {
+				"navigationBarTitleText": "转账",
+				"navigationBarTextStyle":"white",
+				"app-plus":{
+					"titleNView": false,
+					"animationType":"slide-in-slide-in-left",
+					"bounce":"none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
 			"path": "pages/assetsList/assetsList",
 			"style": {
 				"navigationBarTitleText": "资产列表",

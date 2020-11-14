@@ -46,6 +46,9 @@ function getAmount(balance,decimals){
 	//转换数量
 	return (balance/Math.pow(10,decimals)).toFixed(3)
 }
+function toUpCase(symbol){
+	return symbol.toUpCase();
+}
 module.exports = {
-	getAccount,getuserInfo,getCoin,getAmount
+	getAccount,getuserInfo,getCoin,getAmount,toUpCase
 }

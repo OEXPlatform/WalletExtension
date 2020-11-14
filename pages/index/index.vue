@@ -47,21 +47,22 @@
 			<text :class="tabAssetActive?'active':''" @tap="chageTabHandler(1)">资产</text>
 			<text :class="tabTransactionActive?'active':''" @tap="chageTabHandler(2)">交易</text>
 		</view>
-		<view class="assetsBlcok" v-if="tabAssetActive" @click="assetsDetailHandler">
-			<image src="../../static/img/bg1.png" class="bg"></image>
-			<view class="assets">
+		<image src="../../static/img/bg1.png" class="bg"></image>
+		<scroll-view class="assetsBlcok" scroll-y="true" v-if="tabAssetActive" >
+			
+			<view class="assets" v-if="assetsList.length > 0" v-for="(item,assetsIndex) in assetsList" :key="assetsIndex"
+			 @click="assetsDetailHandler(item.assetId,item.balance,item.symbol,item.decimals)">
 				<view class="assetsLeft">
 					<image src="../../static/img/assetsIcon.png"></image>
 					<view class="assetsDetail">
-						<text>{{oexBalance}} OEX</text>
-						<!-- <text>$0.00 USD</text> -->
+						<text>{{getBalance(item.balance,item.decimals)}} {{toUpperCaseSymbol(item.symbol)}}</text>
 					</view>
 				</view>
 				<image src="../../static/img/rightIcon.png" class="rightIcon"></image>
 			</view>
-			<image src="../../static/img/bg2.png" class="bg"></image>
-			<view class="addCoin">添加代币</view>
-		</view>
+			<text class="noData" v-else >无资产</text>
+			<!-- <view class="addCoin">添加代币</view> -->
+		</scroll-view>
 		<view class="transactionBlock" v-else :style="scrollHeight">
 			<image src="../../static/img/bg1.png" class="bg"></image>
 			<view class="nodataBlock" >
@@ -70,19 +71,7 @@
 				@scroll="scroll"
 				@scrolltolower="scrolltolower"
 				 @scrolltoupper="scrolltoupper">
-					<!-- <view class="transactionItem" 	v-for="(item,index) in dataList" :key="index">
-						<view class="left">
-							<view class="transactionDetail">
-								<text class="transcationType">{{item.txto == account_info.accountName ? 'From：' + initAccountName(item.txfrom)  :'To：' + initAccountName(item.txto)}}</text>
-								<text class="transcationInfo">{{item.txto == account_info.accountName? i18n.zr:i18n.zc}} : {{item.actiondata.status == "1"? i18n.success : i18n.failed}}</text>
-							</view>
-						</view>
-						<view class="right">
-							<view class="transactionAmount">{{i18n.amount}}: {{getAmount(item.actiondata.realvalue)}} {{item.actiondata.symbol}}</view>
-							<view class="transactionRate">{{i18n.time}}: {{getTime(item.transactiontime)}}</view>
-						</view>
-					</view> -->
-					<view class="detailItem" v-for="(item,index) in dataList" :key="index">
+					<view class="detailItem" v-for="(item,index) in dataList" :key="index" @click="transactionDetail(item.actionhash)">
 						<view class="left">
 							<view class="leftTop">
 								<text class="outTitle" :class="{'vote':item.actiondata.type == 772,'red':item.txto != accountName && item.actiondata.type != 772, 'green':item.txto == accountName && item.actiondata.type != 772}">{{getType(item)}}</text>
@@ -97,7 +86,7 @@
 						</view>
 					</view>
 				</scroll-view>
-				<text class="noData" v-else >暂无交易记录</text>
+				<text class="noData" v-else >无交易记录</text>
 			</view>
 		</view>
 	</view>
@@ -120,9 +109,11 @@
 				scrollHeight:'height: 280rpx;',
 				isEditBlock:false,
 				dataList:[],
+				assetsList:[],
 				pageIndex:1, //当前第几页
 				pageSize:10, //页大小
 				isData:false,
+				oexAssets:"",
 				oexAssetID:"",
 				oexBalance:0,
 				oexSymbol:""
@@ -144,22 +135,27 @@
 		methods: {
 			getAssets(){
 				//加载资产
+				uni.showLoading()
 				const _this = this;
 				account.getAccount(this.account_info.accountName).then(res =>{
-					//console.log(res)
 					const balances = res.data.result.balances;
-					_this.balances = balances;
+				
 					if(balances.length > 0){
-						const oexAssets = balances.filter(assets =>{
+						_this.oexAssets = balances.filter(assets =>{
 							return assets.assetID == 0
 						})
-						if(oexAssets.length > 0){
-							_this.getOexAssetsDetail(oexAssets[0].assetID,oexAssets[0].balance);
+						
+						balances.map(item =>{
+							_this.getOexAssetsDetail(item.assetID,item.balance);
+						})
+						if(_this.oexAssets.length > 0){
+							_this.getOexAssetsDetail(_this.oexAssets[0].assetID,_this.oexAssets[0].balance,"oex");
+							
 						}else{
 							_this.oexBalance = 0;
 						}
 					}else{
-							_this.oexBalance = 0;
+							return
 					}
 					
 					
@@ -168,24 +164,31 @@
 					console.log(error)
 				})
 			},
-			getOexAssetsDetail(assetID,balance){
+			getOexAssetsDetail(assetID,balance,type){
 				//加载oex资产详情
 				const _this = this;
-				this.oexAssetID = assetID;
 				account.getCoin(assetID).then(result =>{
-					console.log(result)
 					const res = result.data.result;
-					_this.oexSymbol = res.symbol.toUpperCase();
-					_this.oexBalance = account.getAmount(balance,res.decimals);
+					//console.log(res)
+					if(type == "oex"){
+						_this.oexAssetID = assetID;
+						_this.oexSymbol = res.symbol.toUpperCase();
+						_this.oexBalance = account.getAmount(balance,res.decimals);
+					}else{
+						res.balance = balance;
+						_this.assetsList.push(res)
+						uni.hideLoading()
+					}
 				})
 			},
 			assetsListHandle(){
 				//资产列表
 				this.$CommonJS.navigateTo('../assetsList/assetsList')
 			},
-			assetsDetailHandler(){
+			assetsDetailHandler(assetID,balance,symbol,decimals){
 				//资产详情
-				this.$CommonJS.navigateTo('../assetsDetail/assetsDetail?assetID=' + this.oexAssetID + '&balance=' + this.oexBalance + '&symbol=' + this.oexSymbol)
+				balance = account.getAmount(balance,decimals)
+				this.$CommonJS.navigateTo('../assetsDetail/assetsDetail?assetID=' + assetID + '&balance=' + balance + '&symbol=' + symbol)
 			},
 			setNodeInfo(){
 				//设置节点
@@ -209,16 +212,20 @@
 					}
 					nodeList.splice(0,1)
 					nodeList.unshift(nodeInfoData)
-					//this.nodeInfoList = nodeList;
 					uni.setStorageSync('nodeInfoList',nodeList)
 				}else{
-					//this.nodeInfoList = nodeList;
 					uni.setStorageSync('nodeInfoList',nodeList)
 				}
 				
 			},
 			getAmount(amount){
 				return Number(amount).toFixed(2);
+			},
+			getBalance(balance,decimals){
+				return account.getAmount(balance,decimals);
+			},
+			toUpperCaseSymbol(symbol){
+				return symbol.toUpperCase()
 			},
 			initAccountName(accountName){
 				//
@@ -233,80 +240,14 @@
 				}
 				return name;
 			},
-			getTime(time){
-				//转化时间戳
-				time = Number(time.toString().substring(0,13))
-				return this.$CommonJS.getTime(time,1)
-			},
-			getType(listItem){
-				if(listItem.actiondata.type == 772){
-					return '投票'
-				}else{
-					if(listItem.txto == this.account_info.accountName){
-						return '转入'
-					}else{
-						return '转出'
-					}
-				}
-			},
-			getAccount(listItem){
-				if(listItem.actiondata.type == 772){
-					return listItem.txfrom
-				}else{
-					if(listItem.txto == this.account_info.accountName){
-						return listItem.txfrom
-					}else{
-						return listItem.txto
-					}
-				}
-			},
-			getAmout(listItem){
-				if(listItem.actiondata.type == 772){
-					return parseInt(listItem.actiondata.realvalue) + listItem.actiondata.symbol.toUpperCase()
-				}else{
-					if(listItem.txto == this.accountName){
-						return '+' + Number(listItem.actiondata.realvalue).toFixed(2) + listItem.actiondata.symbol.toUpperCase()
-					}
-					return '-' + Number(listItem.actiondata.realvalue).toFixed(2) + listItem.actiondata.symbol.toUpperCase()
-				}
-			},
-			getImg(listItem){
-				if(listItem.actiondata.type == 772){
-					return '../../static/img/vote.png'
-				}else{
-					if(listItem.txto == this.account_info.accountName){
-						return '../../static/img/in.png'
-					}else{
-						return '../../static/img/out.png'
-					}
-				}
-			},
-			getState(listItem){
-				if(listItem.actiondata.type == 772){
-					if(Number(listItem.actiondata.status) == 1){
-						return '投票成功'
-					}else{
-						return '投票失败'
-					}
-				}else{
-					if(Number(listItem.actiondata.status) == 1){
-						return '交易成功'
-					}else{
-						return '交易失败'
-					}
-				}
-			},
 			getTransactionList(){
-				//初始化
+				//初始化交易列表
 				const _this = this;
 				this.requestList().then(res=>{
-					//console.log(res)
-					//uni.hideLoading()
 					if(res.list.length < 1){
 						_this.isData = true;
 						return;
 					}
-					
 					_this.dataList = res.list;
 				}).catch(error =>{
 					console.log(error)
@@ -370,13 +311,13 @@
 					this.buyActive = true;
 					this.sendActive = false;
 					//具体操作
-					console.log("买入")
+					this.$CommonJS.navigateTo('../collection/collection')
 				}else{
-					//发送
+					//转出
 					this.buyActive = false;
 					this.sendActive = true;
 					//具体操作
-					console.log("发送")
+					this.$CommonJS.navigateTo('../transferAccounts/transferAccounts')
 				}
 			},
 			scrolltolower:util.throttle(function(e) {

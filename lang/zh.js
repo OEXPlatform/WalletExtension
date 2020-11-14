@@ -136,7 +136,7 @@ module.exports = {
 		Amount:"请输入收款数量",
 		Token:"币种",
 		QR:"生成二维码",
-		savePHOTO:"保存到相册",
+		savePHOTO:"保存图片",
 		//导出私钥
 		// keyback:"导出私钥安全提示",
 		keyback1:"导出私钥安全提示",

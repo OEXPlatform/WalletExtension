@@ -21,7 +21,7 @@
 		<image src="../../static/img/bg1.png" class="bg"></image>
 		<view class="noData" v-if="list.length < 1">暂无交易</view>
 		<scroll-view class="transactionDetails" scroll-y="true" v-else>
-			<view class="detailItem" v-for="(item,index) in list" :key="index">
+			<view class="detailItem" v-for="(item,index) in list" :key="index" @click="transactionDetail(item.actionhash)">
 				<view class="left">
 					<view class="leftTop">
 						<text class="outTitle" :class="{'vote':item.actiondata.type == 772,'red':item.txto != accountName && item.actiondata.type != 772, 'green':item.txto == accountName && item.actiondata.type != 772}">{{getType(item)}}</text>
@@ -80,13 +80,10 @@
 		},
 		methods:{
 			
-			getTime(time){
-				//转化时间戳
-				time = Number(time.toString().substring(0,13))
-				return this.$CommonJS.getTime(time,1)
-			},
+			
 			getList(){
 				//交易信息
+				uni.showLoading();
 				const _this = this;
 				uni.request({
 					url:this.$API.appServeApi + this.$API.gettransactionforbyassetid,
@@ -101,6 +98,7 @@
 								item.actiondata = JSON.parse(item.actiondata)
 							})
 							_this.list = res.data.data;
+							uni.hideLoading();
 						}
 					},
 					fail(e) {
@@ -108,71 +106,9 @@
 					}
 				})
 			},
-			getType(listItem){
-				if(listItem.actiondata.type == 772){
-					return '投票'
-				}else{
-					if(listItem.txto == this.account_info.accountName){
-						return '转入'
-					}else{
-						return '转出'
-					}
-				}
-			},
-			getAccount(listItem){
-				if(listItem.actiondata.type == 772){
-					return listItem.txfrom
-				}else{
-					if(listItem.txto == this.account_info.accountName){
-						return listItem.txfrom
-					}else{
-						return listItem.txto
-					}
-				}
-			},
-			getAmout(listItem){
-				if(listItem.actiondata.type == 772){
-					return parseInt(listItem.actiondata.realvalue) + listItem.actiondata.symbol.toUpperCase()
-				}else{
-					if(listItem.txto == this.accountName){
-						return '+' + Number(listItem.actiondata.realvalue).toFixed(2) + listItem.actiondata.symbol.toUpperCase()
-					}
-					return '-' + Number(listItem.actiondata.realvalue).toFixed(2) + listItem.actiondata.symbol.toUpperCase()
-				}
-			},
-			getImg(listItem){
-				if(listItem.actiondata.type == 772){
-					return '../../static/img/vote.png'
-				}else{
-					if(listItem.txto == this.account_info.accountName){
-						return '../../static/img/in.png'
-					}else{
-						return '../../static/img/out.png'
-					}
-				}
-			},
-			getState(listItem){
-				if(listItem.actiondata.type == 772){
-					if(Number(listItem.actiondata.status) == 1){
-						return '投票成功'
-					}else{
-						return '投票失败'
-					}
-				}else{
-					if(Number(listItem.actiondata.status) == 1){
-						return '交易成功'
-					}else{
-						return '交易失败'
-					}
-				}
-			},
+			
 			back(){
-				this.nodeInfoName = "";
-				this.nodeInfoUrl = "";
-				uni.reLaunch({
-					url:'../index/index',
-					animationType: 'pop-in',
-				})
+				this.$CommonJS.navigateBack();
 			},
 			operationHandler(n){
 				//买入发送

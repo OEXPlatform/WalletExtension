@@ -1,0 +1,222 @@
+.content {
+	width: 375px;
+	height: 100%;
+	/* #ifdef H5 */
+	overflow-y: scroll;
+	/* #endif */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	background: #FFFFFF;
+	position: relative;
+}
+/* #ifdef H5 */
+.content::-webkit-scrollbar {
+  display: none;
+}
+/* #endif */
+.title{
+	width: 100%;
+	height: 59rpx;
+	text-align: center;
+	line-height: 59rpx;
+	font-size: 15px;
+	color: #000;
+	position: relative;
+	margin: 50rpx 0;
+}
+.backIcon{
+	position: absolute;
+	left: 54rpx;
+	top: 0;
+	width: 59rpx;
+	height: 54rpx;
+}
+/*  */
+.assetsBlock{
+	width: calc(620rpx - 62rpx);
+	height: 109rpx;
+	background: #F2F3F4;
+	opacity: 1;
+	border-radius: 18rpx;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 0 31rpx;
+	position: relative;
+}
+.uni-input{
+	text-align: left;
+	width: calc(100% - 80rpx);
+	padding-left: 80rpx;
+	color: #141426;
+	font-size: 14px;
+}
+.bitcoin{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: 31rpx;
+	width: 54rpx;
+	height: 54rpx;
+}
+.downIcon{
+	width: 24rpx;
+	height: 15rpx;
+	position: absolute;
+	right: 31rpx;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.accountBlock{
+	width: calc(620rpx - 62rpx);
+	height: 109rpx;
+	background: #F2F3F4;
+	opacity: 1;
+	border-radius: 18rpx;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 0 31rpx;
+	margin-top: 18rpx;
+}
+.accountTitle{
+	font-size: 14px;
+	color: #141426;
+}
+.accountInput{
+	width: 70%;
+	font-size: 13px;
+	color: #141426;
+}
+.walletBlock{
+	width: 620rpx;
+	height: auto;
+	padding: 20rpx 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1rpx solid #141425;
+	margin-top: 100rpx;
+	font-size: 14px;
+	
+}
+.transferAmount{
+	width: 620rpx;
+	height: auto;
+	padding: 20rpx 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	color: gray;
+	font-size: 14px;
+}
+.amountInput{
+	width: 100%;
+	font-size: 13px;
+	color: #191930;
+	text-align: left;
+}
+.remark{
+	width: calc(620rpx - 62rpx);
+	height: 158rpx;
+	background: #F2F3F4;
+	opacity: 1;
+	font-size: 13px;
+	color: #141425;
+	padding: 20rpx 31rpx;
+	border-radius: 18rpx;
+	margin-top: 50rpx;
+}
+.transferIcon{
+	width: 663rpx;
+	height: 116rpx;
+	margin-top: 100rpx;
+}
+.symol{
+	width: calc(100% - 80rpx);
+	font-size: 13px;
+	color: #141425;
+	text-align: left;
+	padding-left: 80rpx;
+}
+.assetsList{
+	width: calc(100% - 62rpx);
+	height: auto;
+	min-height: 100rpx;
+	max-height: 400rpx;
+	overflow-y: scroll;
+	background: #F2F3F4;
+	border-bottom-left-radius: 18rpx;
+	border-bottom-right-radius: 18rpx;
+	display: flex;
+	position: absolute;
+	top: 91rpx;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 20rpx 31rpx;
+	z-index: 3;
+}
+.assetsList view{
+	width: 100%;
+	padding: 20rpx 0;
+	border-bottom: 1rpx solid #C0C0C0;
+	font-size: 13px;
+	color: #141425;
+	word-wrap:break-word;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	
+}
+.assetsList text{
+	font-size: 13px;
+	color: #999;
+	
+}
+.imgbox{
+	width: auto;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin:30rpx 0 64upx 0;
+	opacity:1;
+	border-radius: 18upx;
+}
+.canvas{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.bottombutton{
+	width:   86%;
+	height:   90upx;
+	background:  #00C9A7;
+	border-radius: 50upx;
+	text-align:   center;
+	line-height: 90upx;
+	color: #fff;
+	font-size: 30upx;
+	position: absolute;
+	bottom: 100upx;
+	left: 50%;
+	transform: translateX(-50%);
+}
+	
+.bottom{
+	bottom: 220upx;
+}
+		
+	

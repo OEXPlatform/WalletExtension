@@ -133,7 +133,7 @@ module.exports = {
 		Amount:"AMOUNT",
 		Token:"Token",
 		QR:"GENERATE QR CODE",
-		savePHOTO:"SAVE TO PHOTOS",
+		savePHOTO:"SAVE PICTURE",
 		//导出私钥
 		keyback1:"SAFETY TIPS FOR ",
 		keyback2:"EXPORTING PRIVATE KEYS",
