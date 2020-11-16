@@ -42,7 +42,7 @@
 			let nodeInfoList = uni.getStorageSync('nodeInfoList');
 			if(!nodeInfoList){
 				const nodeInfoData = [{
-					name: 'OEXChain主网',
+					name: _this._i18n.locale == 'zh_CN' ? 'OEXChain主网':'OEXChain mainnet',
 					url: 'http://mainnet.oexchain.com',
 					active:'T'
 				}]

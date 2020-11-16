@@ -2,16 +2,16 @@
 	<view class="header">
 		<image src="../../static/img/logo.png" class="logo"></image>
 		<view class="headerRight">
-			<view class="setNodeInfo" @tap="toggleNodeInfoBlockHandler">
+			<view class="setNodeInfo" @click.stop="toggleNodeInfoBlockHandler">
 				<view class="circle"></view>
 				<text class="mainNet">{{nodeInfo}}</text>
 				<image src="../../static/img/dowIcon.png"></image>
 			</view>
-			<image src="../../static/img/avatar.png" class="avatar"></image>
+			<Language></Language>
 		</view>
 		<view class="setNodeInfoBlock" v-if="isNodeInfo">
-			<view class="title">网络</view>
-			<view class="tips">默认以OEXChain为主网</view>
+			<view class="title">{{i18n.web}}</view>
+			<view class="tips">{{i18n.defaultweb}}</view>
 			<view class="nodeItem" v-for="(nodeInfo,index) in nodeInfoList" :key="index" @tap="changeIndexHandle(index)">
 				<image :src="nodeInfo.active == 'T'?'../../static/img/selectgreen.png':'../../static/img/selectwheit.png'"></image>
 				<text :class="nodeInfo.active == 'T'?'activeNode':''">{{nodeInfo.name}}</text>
@@ -19,7 +19,7 @@
 			</view>
 			<view class="nodeItem" @tap="setNodeInfoHandler">
 				<image src="../../static/img/selectwheit.png"></image>
-				<text>自定义</text>
+				<text>{{i18n.custom}}</text>
 			</view>
 		</view>
 	</view>
@@ -27,7 +27,7 @@
 
 <script>
 	import * as oex from 'oex-web3';
-	// import {myMixins} from '../../common/mixins.js' 
+	import Language from '../Language/language.vue';
 	export default{
 		data(){
 			return{
@@ -35,6 +35,12 @@
 				nodeInfoList:[],
 				nodeInfo:"",
 				newList:[]
+			}
+		},
+		components:{ Language },
+		computed: {
+			i18n() {
+				return this.$t('user')
 			}
 		},
 		watch: {

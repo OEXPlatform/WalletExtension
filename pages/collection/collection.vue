@@ -5,16 +5,9 @@
 			<image src="../../static/img/back2.png" class="backIcon" @tap="back"></image>收款
 		</view>
 		<view class="assetsBlock">
-			<!-- <image src="../../static/img/Bitcoin.png" class="bitcoin"></image> -->
 			<view class="example-body" style="width: 100%">
-				<uni-combox :label="i18n.selectToken" :candidates="candidates" placeholder="" v-model="coin" @input="getCoin"></uni-combox>
+				<uni-combox :label="coin_name" :candidates="candidates" placeholder="" v-model="coin" @input="getCoin" ></uni-combox>
 			</view>
-			<!-- <text class="symol" >{{symbol}}</text>
-			<image src="../../static/img/dowIcon.png" class="downIcon"></image>
-			<view class="assetsList" v-if="showAssetsList">
-				<view v-if="symbolList.length >0" @tap="clickItem(item)" v-for="(item,index) in symbolList" :key="index">{{getAuthor(item.assetName)}} ({{item.symbol}})</view>
-				<text v-else>{{i18n.wzc}}</text>
-			</view> -->
 		</view>
 		<view class="walletBlock">
 			<input class="amountInput" type="number" :placeholder="i18n.Amount"  @input="getAmount"/>
@@ -25,29 +18,18 @@
 		<view class="imgbox">
 			<canvas class="canvas" canvas-id="qrcode" style="width: 200px;height: 200px;" />
 		</view>
-		<view class="bottombutton" @tap="makeQrcodeImg"  v-if="!isSave">
+		<view class="bottombutton" @tap="makeQrcodeImg"  v-if="!isSave" :class="changeColor? 'green': ''">
 			{{i18n.QR}}
 		</view>
 		<view class="bottombutton" @tap="saveQrcode" v-if="isSave">
 			{{i18n.savePHOTO}}
 		</view>
-		<!-- <view class="transferAmount">
-			<text>{{symbol}}</text>
-			<input class="amountInput" placeholder="请输入收款数量" v-model="amount"/>
-		</view> -->
-		<!-- <textarea class="remark" placeholder="收款账户：（选填） " v-model="remark"></textarea> -->
-		<!-- <image src="../../static/img/transfer.png" class="transferIcon" @tap="recharge"></image>
-		<password v-if="show" :gasPrice="100" :gasLimit="1000000" @close="close" @callback="callback" :yzpassword="i18n.yzpassword" :btnl="i18n.btn1" :btnr="i18n.btn2" :placeholder="i18n.placeholder" :passprice="i18n.passprice" :pwdtitle="i18n.pwdtitle" :cap="i18n.cap"></password> -->
 	</view>
 </template>
 
 <script>
-	// import Header from '../../components/Header/header.vue'
 	import {myMixins} from '../../common/mixins.js'
-	// import account from '../../common/account.js'
 	import * as oex from 'oex-web3'; 
-	// import payment from '../../common/payment.js'
-	// import password from '../../components/password/password.vue'
 	import uniCombox from "../../components/uni-combox/uni-combox"
 	import uQRCode from '../../common/uqrcode.js'
 	export default{
@@ -61,26 +43,49 @@
 				symablList:[],
 				coin: '',
 				coin_Name:"",
-				coin_name:this._i18n.locale == 'zh_CN' ? "请选择币种":'Please select currency',//显示的币种名称
-				
+				coin_name:"",//显示的币种名称
+				assetName:"",
 				//个人账户信息
 				accountName:"",
 				accountID:"",
 				assetinfolist:"",//获取当前主流资产列表
 				
 				qrcodeSrc:"",
-				canvasShow:true
+				canvasShow:true,
+				changeColor:false,
 			}
 		},
 		mixins: [myMixins], 
 		computed: {
+			changeData() {
+				const { coin_name, amount} = this
+				return {
+					coin_name,
+					amount
+				}
+			},
 			i18n() {
 				return this.$t('user')
+			}
+		},
+		watch: {
+			changeData: {
+				handler: function (newval, oldval) {
+					this.coin_name = newval.coin_name;
+					this.amount = newval.amount;
+					if(this.coin_name != "" && this.amount != ""){
+						this.changeColor = true
+					}else{
+						this.changeColor = false
+					}
+				},
+				deep: true
 			}
 		},
 		components:{ uniCombox },
 		onLoad() {
 			//	获取当前主流资产列表
+			this.coin_name = this._i18n.locale == 'zh_CN' ? "请选择币种":'Please select currency'
 			this.getAssetinfolist();
 		},
 		methods: {
@@ -143,6 +148,9 @@
 			},
 			back(){
 				//返回
+				this.coin_name = "",
+				this.coin_Name = "";
+				this.amount = "";
 				this.$CommonJS.navigateBack()
 			},
 			getAmount(event){
@@ -230,7 +238,6 @@
 				}else{
 					this.request(e)
 				}
-				
 				this.coin_name = e;
 				this.coin_Name = e;
 			}

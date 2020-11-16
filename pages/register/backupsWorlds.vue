@@ -32,7 +32,7 @@
 					<text>{{i18n.attention_item8}}</text>
 				</view>
 			</view>
-			<image v-if="isnext" src="../../static/img/next.png" class="next_btn" @tap="next"></image>
+			<image v-if="isnext" :src="i18n.netbtnimg" class="next_btn" @tap="next"></image>
 		</view>
 		
 	</view>

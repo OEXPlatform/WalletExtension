@@ -2,7 +2,7 @@
 	<view class="content" @click="showAssetsList=false">
 		<!-- <Header></Header> -->
 		<view class="title">
-			<image src="../../static/img/back2.png" class="backIcon" @tap="back"></image>转账
+			<image src="../../static/img/back2.png" class="backIcon" @tap="back"></image>{{i18n.transfer}}
 		</view>
 		<view class="assetsBlock" @click.stop="showAssetsList=!showAssetsList">
 			<image src="../../static/img/Bitcoin.png" class="bitcoin"></image>
@@ -14,19 +14,19 @@
 			</view>
 		</view>
 		<view class="accountBlock">
-			<text class="accountTitle">收款账户： </text>
+			<text class="accountTitle">{{i18n.receiptaccount}}： </text>
 			<input type="text" class="accountInput" v-model="toAccountName"/>
 		</view>
 		<view class="walletBlock">
-			<text>钱包账户余额</text>
+			<text>{{i18n.Balance}}</text>
 			<text>{{currentAmount}}</text>
 		</view>
 		<view class="transferAmount">
 			<text>{{symbol}}</text>
-			<input class="amountInput" placeholder="请输入您要划转的数量" v-model="amount"/>
+			<input class="amountInput" :placeholder="i18n.hdBalance" v-model="amount"/>
 		</view>
-		<textarea class="remark" placeholder="收款账户：（选填） " v-model="remark"></textarea>
-		<image src="../../static/img/transfer.png" class="transferIcon" @tap="recharge"></image>
+		<textarea class="remark" :placeholder="i18n.remarkstyle" v-model="remark"></textarea>
+		<image :src="src" class="transferIcon" @tap="recharge"></image>
 		<password v-if="show" :gasPrice="100" :gasLimit="1000000" @close="close" @callback="callback" :yzpassword="i18n.yzpassword" :btnl="i18n.btn1" :btnr="i18n.btn2" :placeholder="i18n.placeholder" :passprice="i18n.passprice" :pwdtitle="i18n.pwdtitle" :cap="i18n.cap"></password>
 	</view>
 </template>
@@ -55,13 +55,38 @@
 				assetId: "",
 				decimals: "",
 				assetName:"",
-				symbol:"选择币种"
+				changeColor:false,
+				symbol:this._i18n.locale == 'zh_CN' ? "选择币种":"Select Token",
+				src:this._i18n.locale == 'zh_CN'?"../../static/img/transfer.png":"../../static/img/transferEn.png"
 			}
 		},
 		mixins: [myMixins], 
 		computed: {
+			changeData() {
+				const { assetName, toAccountName,amount} = this
+				return {
+					assetName,
+					toAccountName,
+					amount
+				}
+			},
 			i18n() {
 				return this.$t('user')
+			}
+		},
+		watch:{
+			changeData: {
+				handler: function (newval, oldval) {
+					this.assetName = newval.assetName;
+					this.toAccountName = newval.toAccountName;
+					this.amount = newval.amount;
+					if(this.assetName != "" && this.toAccountName != "" && this.amount !=""){
+						this._i18n.locale == 'zh_CN'? this.src = "../../static/img/transferGreen.png": this.src =  "../../static/img/transferGreenEn.png"
+					}else{
+						this._i18n.locale == 'zh_CN'? this.src = "../../static/img/transfer.png": this.src =  "../../static/img/transferEn.png"
+					}
+				},
+				deep: true
 			}
 		},
 		components:{ Header,password},

@@ -1,3 +1,4 @@
+import i18n from './index.js';
 module.exports = {
 	language: {
 		name: '中文'
@@ -8,7 +9,21 @@ module.exports = {
 			msgRecharge:"交易生成有误",
 			logOut:"已退出",
 		},
+		linkStatus:"已连接",
+		login:"../../static/img/login.png",
+		logOut:"退出登录",
 		setNodeInfo:"设置节点",
+		assets:"资产",
+		jiaoyi:"交易",
+		web:"网络",
+		custom:"自定义",
+		webName:"网络名称",
+		addRPC:"新增 RPC URL",
+		cancel:"取消",
+		save:"保存",
+		di:"第",
+		wei:"位",
+		defaultweb:"默认以OEXChain为主网",
 		nodeInfoTips:"恶意的以太坊网络提供商可以谎报区块链的状态并记录您的网络活动。只添加您信任的自定义网络。",
 		banner:"../../static/img/bannerzh.png",
 		banner2:"../../static/img/bannerZhh.png",
@@ -72,7 +87,7 @@ module.exports = {
 		amount:"金额",
 		time:"时间",
 		transaction:"交易记录",
-		nodata:"暂无交易数据",
+		nodata:"无交易",
 		transactionstyle:"margin-left :217upx;font-size:21upx;color:#C2C9DF",
 		//导出私钥
 		medcsy:"导出私钥",
@@ -156,7 +171,15 @@ module.exports = {
 		logintext:"欢迎登录",
 		drqb:"导入钱包",
 		drqblogin:"导入钱包",
-		loginnameback:"background:url(../../static/img/login_username.png) no-repeat;width: 400upx ;height: 76upx ;background-size :100%",
+		loginnameback:"width: 562rpx;height: 120rpx;background:url(../../static/img/accountBg.png)no-repeat;background-size :100%",
+		pwdbg:"width: 562rpx;height: 120rpx;background:url(../../static/img/pwdBg.png)no-repeat;background-size :100%",
+		input:"width: 430rpx;",
+		block:"width: 562rpx;height: 120rpx;background: url(../../static/img/phone.png)no-repeat;background-size: cover;",
+		code:"width: 70%;height: 120rpx;background: url(../../static/img/vcode.png)no-repeat;background-size: cover;",
+		account:"width: 562rpx;height: 120rpx;background: url(../../static/img/accountName.png)no-repeat;background-size: cover;",
+		pwd:"width: 562rpx;height: 120rpx;background: url(../../static/img/pwd.png)no-repeat;background-size: cover;",
+		pwd2:"width: 562rpx;height: 120rpx;background: url(../../static/img/pwd2.png)no-repeat;background-size: cover;",
+		textAlign:"text-align:left;",
 		loginpassback:"background:url(../../static/img/login_pwd.png) no-repeat;width: 400upx ;height: 76upx ;background-size :100%",
 		xiaobai_check:"我是小白用户(小白用户必选)",
 		login_btn1:"../../static/img/login-btn_default.png",
@@ -216,7 +239,8 @@ module.exports = {
 	attention_item6:"使用网络传输",
 	attention_item7:"使用",
 	attention_item8:"纸笔抄录下来",
-	netbtnimg:"../../static/img/next_btn.png",
+	netbtnimg:"../../static/img/next.png",
+	
 	//验证主力次
 	yzzlcregister_title:"验证助记词",
 	yzzlcregister_titlestyle:"",

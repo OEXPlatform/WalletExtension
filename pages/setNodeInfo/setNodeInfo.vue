@@ -10,7 +10,7 @@
 		<view>
 			<view class="zhujici_title zhujicipwd">
 				<image src="../../static/img/point.png"></image>
-				<text>网络名称</text>
+				<text>{{i18n.webName}}</text>
 			</view>
 			<view class="pwd">
 				<input  type="text" class="passworld"  placeholder-class="pwd_placeholder" v-model="nodeInfoName" maxlength="24" />
@@ -19,15 +19,15 @@
 		<view>
 			<view class="zhujici_title zhujicipwd">
 				<image src="../../static/img/point.png"></image>
-				<text>新增 RPC URL</text>
+				<text>{{i18n.addRPC}}</text>
 			</view>
 			<view class="pwd">
 				<input  type="text" class="passworld" placeholder-class="pwd_placeholder" placeholder="http(https)://xxx" v-model="nodeInfoUrl" />
 			</view>
 		</view>
 		<view class="setBtns">
-			<text class="cancel" @tap="back">取消</text>
-			<text class="save" @click="saveHandler">保存</text>
+			<text class="cancel" @tap="back">{{i18n.cancel}}</text>
+			<text class="save" @click="saveHandler">{{i18n.save}}</text>
 		</view>
 	
 	</view>
@@ -41,8 +41,8 @@
 	export default{
 		data(){
 			return{
-				nodeInfoName:"OEX测试网1",
-				nodeInfoUrl:"http://mainnet-bj.oexchain.com",
+				nodeInfoName:"",
+				nodeInfoUrl:"",
 			}
 		},
 		mixins: [myMixins], 
@@ -69,15 +69,15 @@
 			saveHandler(){
 				const _this = this;
 				if(!this.nodeInfoName){
-					_this.$CommonJS.showToast('网络名称不能为空');
+					_this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ? '网络名称不能为空':'The network name cannot be empty');
 					return;
 				}
 				if(!this.nodeInfoUrl){
-					_this.$CommonJS.showToast('RPC URL 不能为空');
+					_this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ?'RPC URL 不能为空':"RPC URL cannot be empty");
 					return;
 				}
 				if(!this.$CommonJS.validateURL(this.nodeInfoUrl.trim())){
-					_this.$CommonJS.showToast('无效的 URL');
+					_this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ?'无效的 URL':"Invalid URL");
 					return;
 				}
 				const nodeInfo = {
@@ -93,7 +93,7 @@
 					data:nodeInfoList,
 					success() {
 						uni.showToast({
-							title:'保存成功'
+							title:_this._i18n.locale == 'zh_CN' ?'保存成功':'saved'
 						})
 					}
 				})

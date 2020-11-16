@@ -44,7 +44,7 @@ async function getuserInfo(data){
 }
 function getAmount(balance,decimals){
 	//转换数量
-	return (balance/Math.pow(10,decimals)).toFixed(3)
+	return (balance/Math.pow(10,decimals))
 }
 function toUpCase(symbol){
 	return symbol.toUpCase();

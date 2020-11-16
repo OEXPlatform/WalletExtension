@@ -123,3 +123,15 @@ page{
 	border-radius: 50rpx;
 	margin: 0 65rpx;
 }
+.language{
+	width: calc(100% - 60rpx);
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	position: absolute;
+	top: 50rpx;
+	left: 50%;
+	transform: translateX(-50%);
+}

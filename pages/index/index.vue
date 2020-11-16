@@ -1,36 +1,36 @@
 <template>
-	<view class="content">
+	<view class="content" @tap="isEditBlock=false">
 		<Header></Header>
 		<view class="linkStatus">
 			<view class="linkStatusBlock">
-				<image src="../../static/img/linkStatus.png"></image>
-				<text>未连接</text>
+				<image src="../../static/img/linkStatusGreen.png"></image>
+				<text>{{i18n.linkStatus}}</text>
 			</view>
 			<view class="accountInfo">
 				<text class="accountName">{{shotrAccount}}</text>
 				<!-- <text>0xd796…D785</text> -->
 			</view>
-			<image src="../../static/img/EditIcon.png" class="editIcon" @tap="isEditBlockHandler"></image>
+			<image src="../../static/img/EditIcon.png" class="editIcon" @click.stop="isEditBlockHandler"></image>
 			<view class="editBlock" v-if="isEditBlock">
-				<view class="accountInfoBlock" @tap="accountInfoHandler">
+				<!-- <view class="accountInfoBlock" @tap="accountInfoHandler">
 					<image src="../../static/img/accountIcon.png"></image>
 					<text>账户详情</text>
 				</view>
 				<view class="accountInfoBlock" @tap="assetsListHandle">
 					<image src="../../static/img/service-assets.png"></image>
 					<text>我的资产</text>
-				</view>
+				</view> -->
 				<view class="accountInfoBlock" @tap="scanHandler">
 					<image src="../../static/img/scanInconActive.png"></image>
-					<text>导出私钥</text>
+					<text>{{i18n.dcsy}}</text>
 				</view>
 				<view class="accountInfoBlock" @tap="setNodeInfo">
 					<image src="../../static/img/web.png"></image>
-					<text>设置节点</text>
+					<text>{{i18n.szjd}}</text>
 				</view>
 				<view class="accountInfoBlock" @tap="logoutHandler">
 					<image src="../../static/img/log-out.png"></image>
-					<text>退出登录</text>
+					<text>{{i18n.logOut}}</text>
 				</view>
 			</view>
 		</view>
@@ -39,19 +39,19 @@
 			<text class="assetsName">{{oexBalance}} OEX</text>
 			<text class="exchangeRate"></text>
 			<view class="operationHandler">
-				<text class="buyHandler" :class="buyActive?'operationActive':''" @tap="operationHandler(1)">转入</text>
-				<text class="sendHanler" :class="sendActive?'operationActive':''"  @tap="operationHandler(2)">转出</text>
+				<text class="buyHandler" :class="buyActive?'operationActive':''" @tap="operationHandler(1)">{{i18n.Collection}}</text>
+				<text class="sendHanler" :class="sendActive?'operationActive':''"  @tap="operationHandler(2)">{{i18n.transfer}}</text>
 			</view>
 		</view>
 		<view class="navTab">
-			<text :class="tabAssetActive?'active':''" @tap="chageTabHandler(1)">资产</text>
-			<text :class="tabTransactionActive?'active':''" @tap="chageTabHandler(2)">交易</text>
+			<text :class="tabAssetActive?'active':''" @tap="chageTabHandler(1)">{{i18n.assets}}</text>
+			<text :class="tabTransactionActive?'active':''" @tap="chageTabHandler(2)">{{i18n.jiaoyi}}</text>
 		</view>
 		<image src="../../static/img/bg1.png" class="bg"></image>
 		<scroll-view class="assetsBlcok" scroll-y="true" v-if="tabAssetActive" >
 			
 			<view class="assets" v-if="assetsList.length > 0" v-for="(item,assetsIndex) in assetsList" :key="assetsIndex"
-			 @click="assetsDetailHandler(item.assetId,item.balance,item.symbol,item.decimals)">
+			 @click="assetsDetailHandler(item.assetId,item.balance,item.symbol,item.decimals,item.assetName)">
 				<view class="assetsLeft">
 					<image src="../../static/img/assetsIcon.png"></image>
 					<view class="assetsDetail">
@@ -60,7 +60,7 @@
 				</view>
 				<image src="../../static/img/rightIcon.png" class="rightIcon"></image>
 			</view>
-			<text class="noData" v-else >无资产</text>
+			<text class="noData" v-else >{{i18n.wzc}}</text>
 			<!-- <view class="addCoin">添加代币</view> -->
 		</scroll-view>
 		<view class="transactionBlock" v-else :style="scrollHeight">
@@ -86,7 +86,7 @@
 						</view>
 					</view>
 				</scroll-view>
-				<text class="noData" v-else >无交易记录</text>
+				<text class="noData" v-else >{{i18n.nodata}}</text>
 			</view>
 		</view>
 	</view>
@@ -94,6 +94,7 @@
 
 <script>
 	import Header from '../../components/Header/header.vue'
+	
 	import {myMixins} from '../../common/mixins.js' 
 	const util = require('../../common/util.js'); 
 	import account from '../../common/account.js'
@@ -116,7 +117,7 @@
 				oexAssets:"",
 				oexAssetID:"",
 				oexBalance:0,
-				oexSymbol:""
+				oexSymbol:"",
 			}
 		},
 		mixins: [myMixins],
@@ -185,10 +186,10 @@
 				//资产列表
 				this.$CommonJS.navigateTo('../assetsList/assetsList')
 			},
-			assetsDetailHandler(assetID,balance,symbol,decimals){
+			assetsDetailHandler(assetID,balance,symbol,decimals,assetName){
 				//资产详情
 				balance = account.getAmount(balance,decimals)
-				this.$CommonJS.navigateTo('../assetsDetail/assetsDetail?assetID=' + assetID + '&balance=' + balance + '&symbol=' + symbol)
+				this.$CommonJS.navigateTo('../assetsDetail/assetsDetail?assetID=' + assetID + '&balance=' + balance + '&symbol=' + symbol + '&assetName=' + assetName)
 			},
 			setNodeInfo(){
 				//设置节点
@@ -206,7 +207,7 @@
 				})
 				if(arr.length < 1){
 					const nodeInfoData = {
-						name: 'OEXChain主网',
+						name:  _this._i18n.locale == 'zh_CN' ? 'OEXChain主网':'OEXChain mainnet',
 						url: 'http://mainnet.oexchain.com',
 						active:true
 					}

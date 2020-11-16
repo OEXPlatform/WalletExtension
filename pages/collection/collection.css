@@ -203,7 +203,7 @@
 .bottombutton{
 	width:   86%;
 	height:   90upx;
-	background:  #00C9A7;
+	background:  #c9cace;
 	border-radius: 50upx;
 	text-align:   center;
 	line-height: 90upx;
@@ -214,7 +214,9 @@
 	left: 50%;
 	transform: translateX(-50%);
 }
-	
+.green{
+	background: #00C9A7;
+}
 .bottom{
 	bottom: 220upx;
 }

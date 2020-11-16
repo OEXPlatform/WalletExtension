@@ -19,12 +19,12 @@ export const myMixins = {
 	methods:{
 		getType(listItem){
 			if(listItem.actiondata.type == 772){
-				return '投票'
+				return this._i18n.locale == 'zh_CN' ?'投票':'vote'
 			}else{
 				if(listItem.txto == this.account_info.accountName){
-					return '转入'
+					return this._i18n.locale == 'zh_CN' ?'转入':"roll-in"
 				}else{
-					return '转出'
+					return this._i18n.locale == 'zh_CN' ?'转出':"roll-out"
 				}
 			}
 		},
@@ -63,15 +63,15 @@ export const myMixins = {
 		getState(listItem){
 			if(listItem.actiondata.type == 772){
 				if(Number(listItem.actiondata.status) == 1){
-					return '投票成功'
+					return this._i18n.locale == 'zh_CN' ?'投票成功':"Vote Successful"
 				}else{
-					return '投票失败'
+					return this._i18n.locale == 'zh_CN' ?'投票失败':"Vote Failed"
 				}
 			}else{
 				if(Number(listItem.actiondata.status) == 1){
-					return '交易成功'
+					return this._i18n.locale == 'zh_CN' ?'交易成功':"Trade Successful"
 				}else{
-					return '交易失败'
+					return this._i18n.locale == 'zh_CN' ?'交易失败':"Trade Failed"
 				}
 			}
 		},

@@ -2,19 +2,19 @@
 	<view class="login">
 		<image src="../../static/img/back_icon.png" class="xiaobaiBack" @tap="backHandler"></image>
 		<view class="registrTitle">{{i18n.zyyhtitle}}</view>
-		<view class="block">
-			<input type="email" v-model="email" :placeholder="i18n.zyyhpl1" class="tell" placeholder-class="placeholder"/>
+		<view class="block" :style="i18n.block">
+			<input type="email" :style="i18n.textAlign" v-model="email" :placeholder="i18n.zyyhpl1" class="tell" placeholder-class="placeholder"/>
 		</view>
-		<view class="account">
-			<input type="text" v-model="accountName" :placeholder="i18n.zyyhpl2" class="accountInput" placeholder-class="placeholder"/>
+		<view class="account" :style="i18n.account">
+			<input type="text" :style="i18n.textAlign" v-model="accountName" :placeholder="i18n.zyyhpl2" class="accountInput" placeholder-class="placeholder"/>
 			<image src="../../static/img/proIcon.png" class="proIcon"></image>
 		</view>
-		<view class="pwd">
-			<input :type="eye?'text':'password'" v-model="password" :placeholder="i18n.zyyhpl3" class="pwdInput" placeholder-class="placeholder"/>
+		<view class="pwd" :style="i18n.pwd">
+			<input :type="eye?'text':'password'" :style="i18n.textAlign" v-model="password" :placeholder="i18n.zyyhpl3" class="pwdInput" placeholder-class="placeholder"/>
 			<image :src="eye?'../../static/img/openeye_green.png':'../../static/img/closeeye_green.png'" class="eye" @tap="chageEye(1)"></image>
 		</view>
-		<view class="pwd2">
-			<input :type="eye2?'text':'password'" v-model="password2" :placeholder="i18n.zyyhpl4" class="pwdInput2" placeholder-class="placeholder"/>
+		<view class="pwd2" :style="i18n.pwd2">
+			<input :type="eye2?'text':'password'" :style="i18n.textAlign" v-model="password2" :placeholder="i18n.zyyhpl4" class="pwdInput2" placeholder-class="placeholder"/>
 			<image :src="eye2?'../../static/img/openeye_green.png':'../../static/img/closeeye_green.png'" class="eye" @tap="chageEye(2)"></image>
 		</view>
 		<view class="agree" @tap="agree_ruls">

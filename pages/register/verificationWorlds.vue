@@ -10,7 +10,7 @@
 			<view class="keyWorlds"  @tap="selectKey(3)">{{three_key}}</view>
 		</view>
 		<view class="verification_key">
-			<text class="keyNumber" v-for="(item,k) in random" :key="k">第{{item}}位</text>
+			<text class="keyNumber" v-for="(item,k) in random" :key="k">{{i18n.di}} {{item}} {{i18n.wei}}</text>
 		</view>
 		<view class="worldsBlock verificationKeyWorlds">
 			<text v-for="(item,index) in mnemonic" :key="index" @tap="handleKye(item)">
@@ -18,7 +18,7 @@
 			</text>
 		</view>
 		
-		<image src="../../static/img/next.png" class="next_btn verNext" @tap="next"></image>
+		<image :src="i18n.netbtnimg" class="next_btn verNext" @tap="next"></image>
 	</view>
 </template>
 

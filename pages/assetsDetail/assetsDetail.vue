@@ -14,12 +14,12 @@
 			<text class="assetsName">{{balance}} {{symbol}}</text>
 			<!-- <text class="exchangeRate">$0.00 USD</text> -->
 			<view class="operationHandler">
-				<text class="buyHandler" :class="buyActive?'operationActive':''" @tap="operationHandler(1)">转入</text>
-				<text class="sendHanler" :class="sendActive?'operationActive':''"  @tap="operationHandler(2)">转出</text>
+				<text class="buyHandler" :class="buyActive?'operationActive':''" @tap="operationHandler(1)">{{i18n.Collection}}</text>
+				<text class="sendHanler" :class="sendActive?'operationActive':''"  @tap="operationHandler(2)">{{i18n.transfer}}</text>
 			</view>
 		</view>
 		<image src="../../static/img/bg1.png" class="bg"></image>
-		<view class="noData" v-if="list.length < 1">暂无交易</view>
+		<view class="noData" v-if="list.length < 1">{{i18n.nodata}}</view>
 		<scroll-view class="transactionDetails" scroll-y="true" v-else>
 			<view class="detailItem" v-for="(item,index) in list" :key="index" @click="transactionDetail(item.actionhash)">
 				<view class="left">
@@ -49,6 +49,7 @@
 	export default{
 		data(){
 			return{
+				assetName:"",
 				accountName:"",
 				buyActive:true,
 				sendActive:false,
@@ -75,6 +76,7 @@
 			this.assetID = options.assetID;
 			this.balance = options.balance;
 			this.symbol = options.symbol;
+			this.assetName = options.assetName;
 			//交易信息
 			this.getList();
 		},
@@ -117,13 +119,13 @@
 					this.buyActive = true;
 					this.sendActive = false;
 					//具体操作
-					console.log("买入")
+					this.$CommonJS.navigateTo('../collection/collection');
 				}else{
 					//发送
 					this.buyActive = false;
 					this.sendActive = true;
 					//具体操作
-					console.log("发送")
+					this.$CommonJS.navigateTo('../transferAccounts/transferAccounts');
 				}
 			},
 		}

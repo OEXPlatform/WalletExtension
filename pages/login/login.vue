@@ -1,12 +1,13 @@
 <template>
 	<view class="login">
+		<view class="language"><Language></Language></view>
 		<view class="title">{{i18n.logintext}}</view>
 		<view class="loginBlock">
-			<view class="account">
-				<input type="text" class="input" v-model="accountName"/>
+			<view class="account" :style="i18n.loginnameback">
+				<input type="text" class="input" v-model="accountName" :style="i18n.input"/>
 			</view>
-			<view class="pwd">
-				<input :type="eye?'text':'password'" class="input" v-model="password"/>
+			<view class="pwd" :style="i18n.pwdbg">
+				<input :type="eye?'text':'password'" class="input" v-model="password" :style="i18n.input"/>
 				<image :src="eye?'../../static/img/openeye_green.png':'../../static/img/closeeye_green.png'" class="eye" @tap="chageEye"></image>
 			</view>
 			<checkbox-group @change="check_xiaobai" class="xiaobai_check">
@@ -15,7 +16,7 @@
 				</label>
 			</checkbox-group>
 		</view>
-		<image :src="changeColor?'../../static/img/loginBtn.png':'../../static/img/loginDefault.png'" class="loginBtn" @tap="loginHandler"></image>
+		<image :src="i18n.login" class="loginBtn" @tap="loginHandler"></image>
 		<view class="bottom">
 			<view class="addAccount" @tap="registerHandlerLogin">
 				<image src="../../static/img/addAccountIcon.png"></image>
@@ -33,6 +34,7 @@
 <script>
 	import { ethers } from 'ethers';
 	import * as oex from 'oex-web3'; 
+	import Language from '../../components/Language/language.vue'
 	export default{
 		data(){
 			return{
@@ -57,6 +59,7 @@
 				return this.$t('user')
 			}
 		},
+		components:{Language},
 		watch: {
 			changeData: {
 				handler: function (newval, oldval) {
