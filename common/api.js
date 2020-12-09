@@ -4,8 +4,8 @@ module.exports = {
 	admin:"oexchainofficial",
 	//注册
 	
-	 //appServeApi:"http://api.oexchain.com",
-	appServeApi:"http://192.168.1.19:8080",
+	appServeApi:"http://api.oexchain.com",
+	//appServeApi:"http://192.168.1.19:8080",
 	
 	phoneValidate:"/api/ouser/getcode.oex", //获取短信验证码
 	registerXiaoBai:"/api/ouser/register.oex",//小白注册

@@ -47,7 +47,7 @@
 			<text :class="tabAssetActive?'active':''" @tap="chageTabHandler(1)">{{i18n.assets}}</text>
 			<text :class="tabTransactionActive?'active':''" @tap="chageTabHandler(2)">{{i18n.jiaoyi}}</text>
 		</view>
-		<image src="../../static/img/bg1.png" class="bg"></image>
+		<!-- <image src="../../static/img/bg1.png" class="bg"></image> -->
 		<scroll-view class="assetsBlcok" scroll-y="true" v-if="tabAssetActive" >
 			
 			<view class="assets" v-if="assetsList.length > 0" v-for="(item,assetsIndex) in assetsList" :key="assetsIndex"
@@ -74,14 +74,14 @@
 					<view class="detailItem" v-for="(item,index) in dataList" :key="index" @click="transactionDetail(item.actionhash)">
 						<view class="left">
 							<view class="leftTop">
-								<text class="outTitle" :class="{'vote':item.actiondata.type == 772,'red':item.txto != accountName && item.actiondata.type != 772, 'green':item.txto == accountName && item.actiondata.type != 772}">{{getType(item)}}</text>
+								<text class="outTitle" :class="{'mining':item.actiondata.type == 774,'vote':item.actiondata.type == 772,'red':item.txto != accountName && item.actiondata.type != 772 && item.actiondata.type != 774, 'green':item.txto == accountName && item.actiondata.type != 772 && item.actiondata.type != 774}">{{getType(item)}}</text>
 								<image :src="getImg(item)"  class="out"></image>
 								<text class="account">{{getAccount(item)}}</text>
 							</view>
 							<view class="leftBottom">{{getTime(item.transactiontime)}}</view>
 						</view>
 						<view class="right">
-							<text class="rightTop" :class="{'vote':item.actiondata.type == 772,'red':item.txto != accountName && item.actiondata.type != 772, 'green':item.txto == accountName && item.actiondata.type != 772}">{{getAmout(item)}}</text>
+							<text class="rightTop" :class="{'mining':item.actiondata.type == 774,'vote':item.actiondata.type == 772,'red':item.txto != accountName && item.actiondata.type != 772 && item.actiondata.type != 774, 'green':item.txto == accountName && item.actiondata.type != 772 && item.actiondata.type != 774}">{{getAmout(item)}}</text>
 							<text class="rightBottom">{{getState(item)}}</text>
 						</view>
 					</view>
@@ -132,6 +132,7 @@
 			this.accountName = this.account_info.accountName;
 			this.getTransactionList();
 			this.getAssets();
+			//console.log(getsum(2,6))
 		},
 		methods: {
 			getAssets(){
@@ -226,6 +227,7 @@
 				return account.getAmount(balance,decimals);
 			},
 			toUpperCaseSymbol(symbol){
+				//console.log(symbol)
 				return symbol.toUpperCase()
 			},
 			initAccountName(accountName){
@@ -245,6 +247,7 @@
 				//初始化交易列表
 				const _this = this;
 				this.requestList().then(res=>{
+					console.log(res)
 					if(res.list.length < 1){
 						_this.isData = true;
 						return;

@@ -10,6 +10,7 @@ export const myMixins = {
 	onLoad(){
 		this.login_status = uni.getStorageSync('login_status');
 		this.account_info = uni.getStorageSync("account_info");
+
 		if(this.account_info.accountName.indexOf('.') != -1) this.shotrAccount = this.account_info.accountName.split('.')[1]
 		else this.shotrAccount = this.account_info.accountName
 		
@@ -20,6 +21,8 @@ export const myMixins = {
 		getType(listItem){
 			if(listItem.actiondata.type == 772){
 				return this._i18n.locale == 'zh_CN' ?'投票':'vote'
+			}else if(listItem.actiondata.type == 774){
+				return this._i18n.locale == 'zh_CN' ?'挖矿':'mining'
 			}else{
 				if(listItem.txto == this.account_info.accountName){
 					return this._i18n.locale == 'zh_CN' ?'转入':"roll-in"
@@ -41,7 +44,11 @@ export const myMixins = {
 		},
 		getAmout(listItem){
 			if(listItem.actiondata.type == 772){
+				//投票
 				return parseInt(listItem.actiondata.realvalue) + listItem.actiondata.symbol.toUpperCase()
+			}else if(listItem.actiondata.type == 774){
+				//挖矿
+				return   " *** OEX"
 			}else{
 				if(listItem.txto == this.accountName){
 					return '+' + Number(listItem.actiondata.realvalue).toFixed(2) + listItem.actiondata.symbol.toUpperCase()
@@ -66,6 +73,12 @@ export const myMixins = {
 					return this._i18n.locale == 'zh_CN' ?'投票成功':"Vote Successful"
 				}else{
 					return this._i18n.locale == 'zh_CN' ?'投票失败':"Vote Failed"
+				}
+			}else if(listItem.actiondata.type == 774){
+				if(Number(listItem.actiondata.status) == 1){
+					return this._i18n.locale == 'zh_CN' ?'领取成功':"Claim Successful"
+				}else{
+					return this._i18n.locale == 'zh_CN' ?'领取失败':"Claim Failed"
 				}
 			}else{
 				if(Number(listItem.actiondata.status) == 1){

@@ -366,7 +366,9 @@ module.exports = {
 				registerpieck2:"width:100%",
 				Pleaseenter:"Please enter...",
 				msg_first_style:"width:510rpx;height:160rpx;margin-left: 36rpx;",
-				msg_secound_style:"width:540rpx;height:160rpx;margin-right: 36rpx;"
+				msg_secound_style:"width:540rpx;height:160rpx;margin-right: 36rpx;",
+
+
     },
 	
 }

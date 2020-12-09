@@ -368,7 +368,8 @@ module.exports = {
 	registerpieck2:"width:80%",
 	Pleaseenter:"请输入...",
 	msg_first_style:"width:384rpx;height:160rpx;margin-left: 36rpx;",
-	msg_secound_style:"width:384rpx;height:160rpx;margin-right: 36rpx;"
+	msg_secound_style:"width:384rpx;height:160rpx;margin-right: 36rpx;",
+
 }
 }
 	
