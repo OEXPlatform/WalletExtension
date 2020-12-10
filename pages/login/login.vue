@@ -38,8 +38,8 @@
 	export default{
 		data(){
 			return{
-				accountName:"zhangxiushan",   //账户名
-				password:"123456zxs",      //密码
+				accountName:"",   //账户名
+				password:"",      //密码
 				check:[],
 				changeColor:false,
 				eye:false,
