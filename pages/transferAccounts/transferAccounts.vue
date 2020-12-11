@@ -98,6 +98,7 @@
 			if(traInfo){
 				this.isout = true;
 				this.getTransactionInfoDetail(traInfo);
+				chrome.storage.sync.remove(['traInfo'], function() {})
 			}else{
 				this.getCurrentAccountInfo();//加载当前账户资产
 			}
