@@ -20,12 +20,12 @@ function creatWalletByMnemonic() {
     let rand = ethers.utils.randomBytes(16);
     // 生成助记词
     let mnemonic = ethers.utils.HDNode.entropyToMnemonic(rand);
-    console.log(mnemonic);
+    //console.log(mnemonic);
     let path = "m/44'/550'/0'/0/0";
     // 通过助记词创建钱包
     let wallet = ethers.Wallet.fromMnemonic(mnemonic, path);
-    console.log(wallet.address)
-    console.log(wallet.privateKey)
+    //console.log(wallet.address)
+    //console.log(wallet.privateKey)
 }
 
 //导入助记词生成钱包

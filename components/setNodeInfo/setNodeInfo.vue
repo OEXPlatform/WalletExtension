@@ -53,9 +53,9 @@
 		created() {
 			this.currentNodeInfo = uni.getStorageSync('nodeInfo');
 			const nodeInfo = uni.getStorageSync('nodeInfo');
-			console.log(uni.getStorageSync('nodeInfo'))
+			//console.log(uni.getStorageSync('nodeInfo'))
 			let storgeNodeInfoList = uni.getStorageSync('nodeInfoList');
-			console.log(storgeNodeInfoList)
+			//console.log(storgeNodeInfoList)
 			//let nodeInfoList = 
 			if(storgeNodeInfoList == ""){
 				this.nodeInfoList = [
@@ -132,7 +132,7 @@
 				}
 			},
 			nodeDelHandler(Index){
-				console.log(Index)
+				//console.log(Index)
 				const _this = this;
 				this.nodeInfoList.map((item,index) =>{
 					if(index == Index){

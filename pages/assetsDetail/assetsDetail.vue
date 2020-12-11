@@ -94,7 +94,7 @@
 						assetid:this.assetID
 					},
 					success(res) {
-						console.log(res)
+						//console.log(res)
 						if(res.data.code == 200 && res.data.data.length >0){
 							res.data.data.map(item =>{
 								item.actiondata = JSON.parse(item.actiondata)

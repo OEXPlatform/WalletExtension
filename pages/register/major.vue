@@ -160,7 +160,7 @@
 					data:data,
 					success(res) {
 						
-						console.log(res)
+						//console.log(res)
 						if(res.data.code == 200){
 							_this.Wallet.encrypt(_this.password).then(json =>{
 								uni.setStorage({
@@ -184,7 +184,7 @@
 						}
 					},fail(error) {
 						uni.hideLoading();
-						console.log(error)
+						//console.log(error)
 						_this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ? '注册请求失败':'Registration request failed')
 					}
 				})

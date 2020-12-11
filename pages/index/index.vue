@@ -132,7 +132,22 @@
 			this.accountName = this.account_info.accountName;
 			this.getTransactionList();
 			this.getAssets();
-			//console.log(getsum(2,6))
+			const _this = this;
+			
+			
+			chrome.storage.sync.get(['traInfo'], function(result) {
+				//console.log(result)
+				var res = JSON.stringify(result['traInfo']) ;
+				
+				if(res){
+					_this.$CommonJS.navigateTo('../transferAccounts/transferAccounts?traInfo=' + res)
+				}
+			});
+
+			// chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
+			// {
+			// 	_this.$CommonJS.navigateTo('../transferAccounts/transferAccounts')
+			// });
 		},
 		methods: {
 			getAssets(){
@@ -247,7 +262,7 @@
 				//初始化交易列表
 				const _this = this;
 				this.requestList().then(res=>{
-					console.log(res)
+					//console.log(res)
 					if(res.list.length < 1){
 						_this.isData = true;
 						return;

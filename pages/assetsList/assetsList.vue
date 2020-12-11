@@ -146,13 +146,11 @@
 					this.buyActive = true;
 					this.sendActive = false;
 					//具体操作
-					console.log("买入")
 				}else{
 					//发送
 					this.buyActive = false;
 					this.sendActive = true;
 					//具体操作
-					console.log("发送")
 				}
 			},
 		}

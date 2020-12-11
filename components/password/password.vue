@@ -118,7 +118,7 @@
 					//解密
 					let keystore = uni.getStorageSync(this.account_info.accountName);
 					ethers.Wallet.fromEncryptedJson(keystore, _this.password).then(wallet => {
-						console.log(wallet)
+						//console.log(wallet)
 						uni.hideLoading();
 						_this.show = true;
 						_this.privateKey = wallet.privateKey;
@@ -136,9 +136,9 @@
 					//读取文件
 					Files.getFileData(_this.account_info.accountName).then(txt => {
 						//解密
-						console.log(txt)
+						//console.log(txt)
 						var bytes = CryptoJS.AES.decrypt(txt, _this.password);
-						console.log(bytes)
+						//console.log(bytes)
 						
 						const arr = bytes.words.filter(item =>{
 							return Number(item) < 0
@@ -158,7 +158,7 @@
 							uni.hideLoading()
 						}
 					}).catch(err => {
-						console.log(err)
+						//console.log(err)
 						uni.hideLoading()
 						_this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ?'找不到 keyStore':'KeyStore Lose')
 					})

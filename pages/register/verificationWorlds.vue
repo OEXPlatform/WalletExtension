@@ -41,9 +41,9 @@
 			}
 		},
 		onLoad(options) {
-			console.log(options)
+			//console.log(options)
 			const testArray = JSON.parse(options.mnemonic)
-			console.log(testArray)
+			//console.log(testArray)
 			if (!Array.prototype.derangedArray) {
 			    Array.prototype.derangedArray = function() {
 			        for(var j, x, i = this.length; i; j = parseInt(Math.random() * i), x = this[--i], this[i] = this[j], this[j] = x);
@@ -57,7 +57,7 @@
 				const n = item - 1;
 				this.validateKey.push(JSON.parse(options.mnemonic)[n])
 			})
-			console.log(this.validateKey)
+			//console.log(this.validateKey)
 		},
 		methods:{
 			backHandler(){

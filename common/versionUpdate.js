@@ -13,7 +13,7 @@ module.exports = {
 			var wgtVer = inf.version;
 			//_this.version = wgtVer;
 			if (wgtVer) {
-				console.log("当前应用版本：" + wgtVer);
+				//console.log("当前应用版本：" + wgtVer);
 				if (plus.os.name == "Android") {
 					device = 1;
 				} else if (plus.os.name == "iOS") {
@@ -47,7 +47,7 @@ module.exports = {
 							}
 							//差量包
 							var wgtUrl = d.url;
-							console.log(wgtUrl)
+							//console.log(wgtUrl)
 							plus.downloader.createDownload( wgtUrl, {
 								filename: "_doc/update/"
 							}, function(d, status) {

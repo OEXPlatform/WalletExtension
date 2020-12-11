@@ -9,7 +9,7 @@ module.exports = {
 		return new Promise((resolve,reject) => {
 			//console.log(privateKey + "," + gasPrice + "," + gasLimit);
 			let nodeInfo = uni.getStorageSync('nodeInfo');
-			console.log(nodeInfo)
+			//console.log(nodeInfo)
 			oex.account.getNonce(currentAccountName).then(nonceReqData => {
 				//console.log(nonceReqData);
 				common.request(nodeInfo, "POST", nonceReqData).then( nonce => {
@@ -23,9 +23,9 @@ module.exports = {
 							nonce: nonce.data.result
 						};
 						const gasInfo = {gasPrice:"0x" + new BigNumber(gasPrice).toString(16), gasLimit: "0x" + new BigNumber(gasLimit).toString(16)};
-						console.log(actionInfo)
+						//console.log(actionInfo)
 						oex.action.transfer(actionInfo, gasInfo, privateKey).then(res =>{
-							console.log(res)
+							//console.log(res)
 							
 							common.request(nodeInfo,"POST",res).then( res => {
 								const txHash = res.data.result;
@@ -33,7 +33,7 @@ module.exports = {
 									common.showToast(i18n.locale == 'zh_CN' ? '交易生成有误':'Transaction generation error');
 									return;
 								}
-								console.log(txHash)
+								//console.log(txHash)
 								uni.showLoading({
 									title:i18n.locale == 'zh_CN' ? '交易已发送':'Transaction Sent',
 								});

@@ -36,7 +36,7 @@
 				this.$emit('selected', item, this.currentIndex)
 			},
 			previewImage(index){
-				console.log(this.imgList[index].url)
+				//console.log(this.imgList[index].url)
 				var i =this.imgList[index].url  //获取当前页面的轮播图数据
 						//uniapp预览轮播图
 						uni.previewImage({

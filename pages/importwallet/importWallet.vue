@@ -190,7 +190,7 @@
 							let wallet = "";
 							try{
 								wallet = new ethers.Wallet.fromMnemonic(mnemonic, bip32path, null);
-								console.log(wallet)
+								//console.log(wallet)
 							}catch{
 								uni.hideLoading();
 								_this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ? '助记词不匹配':'Mnemonic Mismatch')
@@ -265,9 +265,9 @@
 							let wallet = "";
 							try {
 							  wallet = new ethers.Wallet('0x' + _this.privateKey);
-								console.log(wallet)
+								//console.log(wallet)
 							}catch (err) {
-								console.log(err)
+								//console.log(err)
 								_this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ? '私钥不匹配':'Private key mismatch')
 							}
 							if(wallet){

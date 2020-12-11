@@ -117,7 +117,7 @@
 				_this.getTime();
 				const url = this.$API.appServeApi + this.$API.phoneValidate + "?mobile=" + this.phone+"&rtype=0";
 				this.$CommonJS.request(url,"POST").then(res => {
-					console.log(res)
+					//console.log(res)
 					_this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ? '验证码已发送':'Verification code sent')
 				}).catch(error => {
 					_this.$CommonJS.showToast(error. message)
@@ -199,7 +199,7 @@
 					title:_this._i18n.locale == 'zh_CN' ? '正在注册':'Registering',
 				})
 				let wallet = ethers.Wallet.createRandom();
-				console.log(wallet)
+				//console.log(wallet)
 				//const privateKey = wallet.privateKey;
 				this.publicKey = wallet.publicKey;
 				//const publicKey = ethers.utils.computePublicKey(privateKey,false);
@@ -227,7 +227,7 @@
 					},
 					data:data,
 					success(res) {
-						console.log(res)
+						//console.log(res)
 						if(res.data.code == 200){
 								uni.setStorage({
 								    key: 'oexchainofficial.' + _this.accountName,
@@ -250,7 +250,7 @@
 						}
 					},fail(error) {
 						uni.hideLoading();
-						console.log(error)
+						//console.log(error)
 						_this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ? '注册请求失败':'Registration request failed')
 					}
 				})

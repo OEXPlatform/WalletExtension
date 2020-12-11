@@ -69,7 +69,7 @@
 			},
 			getWords(){
 				let wallet = ethers.Wallet.createRandom();
-				console.log(wallet)
+				//console.log(wallet)
 				this.mnemonic = wallet.mnemonic.phrase.split(' ');
 				if(this.mnemonic.length < 1){
 					uni.hideLoading();

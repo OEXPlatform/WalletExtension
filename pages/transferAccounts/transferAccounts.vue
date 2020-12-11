@@ -1,10 +1,10 @@
 <template>
-	<view class="content" @click="showAssetsList=false">
+	<view class="content" @click="showAssetsListHandler">
 		<!-- <Header></Header> -->
 		<view class="title">
 			<image src="../../static/img/back2.png" class="backIcon" @tap="back"></image>{{i18n.transfer}}
 		</view>
-		<view class="assetsBlock" @click.stop="showAssetsList=!showAssetsList">
+		<view class="assetsBlock" @click.stop="showAssetsListHandler">
 			<image src="../../static/img/Bitcoin.png" class="bitcoin"></image>
 			<text class="symol" >{{symbol}}</text>
 			<image src="../../static/img/dowIcon.png" class="downIcon"></image>
@@ -23,9 +23,9 @@
 		</view>
 		<view class="transferAmount">
 			<text>{{symbol}}</text>
-			<input class="amountInput" :placeholder="i18n.hdBalance" v-model="amount"/>
+			<input class="amountInput" :placeholder="i18n.hdBalance" v-model="amount" :disabled="isout"/>
 		</view>
-		<textarea class="remark" :placeholder="i18n.remarkstyle" v-model="remark"></textarea>
+		<textarea class="remark" :placeholder="i18n.remarkstyle" v-model="remark" :disabled="isout"></textarea>
 		<image :src="src" class="transferIcon" @tap="recharge"></image>
 		<password v-if="show" :gasPrice="100" :gasLimit="1000000" @close="close" @callback="callback" :yzpassword="i18n.yzpassword" :btnl="i18n.btn1" :btnr="i18n.btn2" :placeholder="i18n.placeholder" :passprice="i18n.passprice" :pwdtitle="i18n.pwdtitle" :cap="i18n.cap"></password>
 	</view>
@@ -56,6 +56,7 @@
 				decimals: "",
 				assetName:"",
 				changeColor:false,
+				isout:false,
 				symbol:this._i18n.locale == 'zh_CN' ? "选择币种":"Select Token",
 				src:this._i18n.locale == 'zh_CN'?"../../static/img/transfer.png":"../../static/img/transferEn.png"
 			}
@@ -90,10 +91,62 @@
 			}
 		},
 		components:{ Header,password},
-		onLoad() {
-			this.getCurrentAccountInfo();//加载当前账户资产
+		onLoad(options) {
+			
+			const traInfo = JSON.parse(options.traInfo);
+			//console.log(traInfo);
+			if(traInfo){
+				this.isout = true;
+				this.getTransactionInfoDetail(traInfo);
+			}else{
+				this.getCurrentAccountInfo();//加载当前账户资产
+			}
 		},
 		methods:{
+			async getTransactionInfoDetail(traInfo){
+				//查看账户是否有这个资产
+				let _this = this;
+				this.toAccountName = traInfo.toAccountName;
+				this.amount = traInfo.amount;
+				this.remark = traInfo.remark;
+				account.getCoin(traInfo.assetId).then(result =>{
+					_this.symbol = result.data.result.symbol;
+				})
+				
+				
+				const nodeInfo = uni.getStorageSync('nodeInfo');
+				 oex.utils.setApp();
+				 const data = await oex.account.getAccountExByName(this.account_info.accountName); //请求参数
+				 this.$CommonJS.request(nodeInfo,"POST",data).then( res => {
+				 		//console.log(res)
+				 		//this.balances = res.data.result.balances;
+						if(res.data.result.balances.length > 0){
+							//根据资产id获取资产详情
+								const arr =  res.data.result.balances.filter(index =>{
+									return index.assetID == Number(traInfo.assetId);
+								})
+								if(arr.length < 1){
+									_this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ? '当前账户无此资产':'There is no such asset in the current account')
+								}else{
+									//查看币种详情
+									//_this.getInfoByAssetsID(res.data.result.balances);
+									account.getCoin(arr[0].assetID).then(result =>{
+										_this.symbol = result.data.result.symbol;
+										_this.assetName = result.data.result.assetName;
+										_this.assetId = result.data.result.assetId;
+										_this.decimals = result.data.result.decimals;
+										_this.currentAmount  = arr[0].balance/Math.pow(10,result.data.result.decimals);
+										//this.isList = false;
+									})
+								}
+								
+						}else{
+							_this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ? '当前账户暂无资产':'There are no assets in the current account')
+						}
+				 }).catch(error => {
+				 		console.log(error)
+				 })
+			},
 			back(){
 				this.symbol = "";
 				this.toAccountName = "";
@@ -109,7 +162,9 @@
 				}
 			},
 			showAssetsListHandler(){
-				this.showAssetsList = !this.showAssetsList;
+				if(this.isout) return;
+				else this.showAssetsList = !this.showAssetsList;
+				
 			},
 			clickItem(item){
 				//console.log(item)
@@ -172,10 +227,13 @@
 			async recharge(){
 				const _this = this;
 				//转账
-				if(this.symbolList.length < 1){
-					this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ? '当前账户暂无资产,不能转账':'There is no asset in the current account, no transfer is allowed');
-					return;
+				if(!this.isout){
+					if(this.symbolList.length < 1){
+						this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ? '当前账户暂无资产,不能转账':'There is no asset in the current account, no transfer is allowed');
+						return;
+					}
 				}
+				
 				if(!this.assetName){
 					this.$CommonJS.showToast(_this._i18n.locale == 'zh_CN' ? '请选择币种':'Please select currency');
 					return;
