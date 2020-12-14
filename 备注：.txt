@@ -1,0 +1,6 @@
+备注：
+1.oex(uni-app)插件打包之后，需要修改打包后的css文件(index.1e555237.css)
+找到里面的html,body{}修改里面的Width和height；width:360px;height:600px;overflow-y:scroll;
+在后面添加::webkit-scrollbar{display:none};(如果不修改，插件页面太小);
+
+2.插件测试demo 只添加了转账功能，目的是唤起插件
